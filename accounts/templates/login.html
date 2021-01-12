@@ -203,7 +203,7 @@
                     <div class="term-forgot-container">
                         <div class="termsdiv ">
                             <input type="checkbox" name="" id="conditionAndTerms">
-                            <a class="termcond" href="./termsandconditions.html">Term and Conditions</a>
+                            <a class="termcond" href="{% url 'core:terms-page' %}">Term and Conditions</a>
                          </div>
                          <div class="termsdiv2">
                             <a class="termcond" href="./forgot-password.html">Forgot Password?</a>
@@ -211,7 +211,7 @@
                      </div>
                               
                                
-                            <a id="registerDirection" href="./register.html">Or Register</a>
+                            <a id="registerDirection" href="{% url 'accounts:register' %}">Or Register</a>
                 </form>
                 <!-- <form class="login-form">
 

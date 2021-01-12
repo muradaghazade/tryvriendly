@@ -29,3 +29,31 @@ class RegisterForm(UserCreationForm):
             'user_type': forms.SelectMultiple(attrs={'id': 'user_type', 'class': 'new-usertypes'}),
             'terms_agreement': forms.CheckboxInput(attrs={'id': 'conditionAndTerms'})
         }
+
+class LoginForm(AuthenticationForm):
+    password = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs={
+                'placeholder' : 'Password',
+                'class' : 'form-inputs',
+            }))
+
+    username = forms.CharField(
+        widget = forms.TextInput(
+            attrs={
+                'id': 'username',
+                'placeholder': 'Your Username',
+                'class': 'form-inputs'
+            }))
+
+    email = forms.CharField(
+        widget = forms.EmailInput(
+            attrs={
+                'id': 'email',
+                'placeholder': 'Your Email',
+                'class': 'form-inputs'
+            }))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']

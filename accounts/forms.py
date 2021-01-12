@@ -26,6 +26,6 @@ class RegisterForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'id': 'last_name', 'placeholder': 'Surname', 'class': 'form-inputs'}),
             'username': forms.TextInput(attrs={'id': 'username', 'placeholder': 'Username', 'class': 'form-inputs'}),
             'email': forms.EmailInput(attrs={'id': 'email', 'placeholder': 'Email Adress', 'class': 'form-inputs'}),
-            'user_type': forms.SelectMultiple(attrs={'id': 'user_type'}),
-            'terms_agreement': forms.CheckboxInput(attrs={'id': 't'})
+            'user_type': forms.SelectMultiple(attrs={'id': 'user_type', 'class': 'new-usertypes'}),
+            'terms_agreement': forms.CheckboxInput(attrs={'id': 'conditionAndTerms'})
         }

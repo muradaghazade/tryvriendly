@@ -198,11 +198,16 @@
                 {{form.email.errors}}
                 {{form.password2}}
                 {{form.password2.errors}}
-                {{form.user_type}}
-                {{form.user_type.errors}}
-                {{form.terms_agreement}}
-                {{form.terms_agreement.errors}}
-                <input type="submit" value="Register" class="">
+                <div id="select-holder">
+                    {{form.user_type}}
+                    {{form.user_type.errors}}
+                </div>
+                <div class="termsdiv">
+                    {{form.terms_agreement}}
+                    {{form.terms_agreement.errors}}
+                    <a class="termcond" href="./termsandconditions.html">Term and Conditions</a>
+                </div>
+                <input type="submit" value="Register" class="form-submit">
             </form>
             <form class="register-form">
 

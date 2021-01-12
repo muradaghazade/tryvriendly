@@ -168,78 +168,78 @@
 
 
 // post request
-function postData(data) {
-    fetch('https://mail-app-12.herokuapp.com/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': '*/*',
-            'Content-Encoding': 'gzip, deflate, br'
-        },
-        json: true,
-        mode: 'cors',
-        body: JSON.stringify(data),
-    })
-        .then(response => response.json())
-        .then((data) => {
-            console.log('Success:', data);
-        })
-}
+// function postData(data) {
+//     fetch('https://mail-app-12.herokuapp.com/register', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': '*/*',
+//             'Content-Encoding': 'gzip, deflate, br'
+//         },
+//         json: true,
+//         mode: 'cors',
+//         body: JSON.stringify(data),
+//     })
+//         .then(response => response.json())
+//         .then((data) => {
+//             console.log('Success:', data);
+//         })
+// }
 
-const user = {
-    fullName: "",
-    email: "",
-    organization: "",
-    region: "",
-    device: "",
-    message: "",
-    regionType: "",
-    // countUsers: '',
-    // countHours: '',
-};
+// const user = {
+//     fullName: "",
+//     email: "",
+//     organization: "",
+//     region: "",
+//     device: "",
+//     message: "",
+//     regionType: "",
+//     // countUsers: '',
+//     // countHours: '',
+// };
 
-//--------------- on submit
-const registerForm = document.querySelector('.register-form');
-registerForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+// //--------------- on submit
+// const registerForm = document.querySelector('.register-form');
+// registerForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
 
-    // putting writing values in the form to the user object
-    for (let element = 0; element < 9; element = element + 1) {
-
-
-        if (((e.target.children[element].value || e.target.children[element].innerText) !== "") || ((e.target.children[element].innerText) === "Device") || ((e.target.children[element].innerText) === "Region type")) {
-            user[(e.target.children[element].name || e.target.children[element].id)] = (e.target.children[element].value || e.target.children[element].innerText);
-        }
-        // console.log("elementin keyi -- " + (e.target.children[element].name || e.target.children[element].id));
-        // console.log("elementin valuesu -- " + (e.target.children[element].value || e.target.children[element].innerText));
-        // console.log(user);
-        // console.log("------------------------------------------");
-    }
+//     // putting writing values in the form to the user object
+//     for (let element = 0; element < 9; element = element + 1) {
 
 
-    const userArray = Object.keys(user);
+//         if (((e.target.children[element].value || e.target.children[element].innerText) !== "") || ((e.target.children[element].innerText) === "Device") || ((e.target.children[element].innerText) === "Region type")) {
+//             user[(e.target.children[element].name || e.target.children[element].id)] = (e.target.children[element].value || e.target.children[element].innerText);
+//         }
+//         // console.log("elementin keyi -- " + (e.target.children[element].name || e.target.children[element].id));
+//         // console.log("elementin valuesu -- " + (e.target.children[element].value || e.target.children[element].innerText));
+//         // console.log(user);
+//         // console.log("------------------------------------------");
+//     }
 
-    function userIsFull() {
-        for (let key of userArray) {
-            if (user[key] === "" || user[key] === "Device" || user[key] === "Region type") {
-                return
-            }
-        }
-        return true
-    }
 
-    if (userIsFull()) {
-        postData(user);
-        showBottomTexts();
-        resetForm();
-        console.log(user);
-        formSubmitBtn.disabled = true;
-    } else {
-        alert("Please fill all cells !")
-    }
+//     const userArray = Object.keys(user);
 
-    // console.log(user);
-});
+//     function userIsFull() {
+//         for (let key of userArray) {
+//             if (user[key] === "" || user[key] === "Device" || user[key] === "Region type") {
+//                 return
+//             }
+//         }
+//         return true
+//     }
+
+//     if (userIsFull()) {
+//         postData(user);
+//         showBottomTexts();
+//         resetForm();
+//         console.log(user);
+//         formSubmitBtn.disabled = true;
+//     } else {
+//         alert("Please fill all cells !")
+//     }
+
+//     // console.log(user);
+// });
 
 
 // --------------------------------------------------------------------

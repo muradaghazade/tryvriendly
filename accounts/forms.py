@@ -57,3 +57,29 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+class ResetItDown(PasswordResetForm):
+    email = forms.EmailField(
+        widget = forms.EmailInput(attrs={
+            'placeholder': 'Your Email',
+            'class': 'form-inputs',
+        })
+    )
+
+class PasswordResetConfirmForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs={
+                'placeholder' : 'New password',
+                'class' : 'form-inputs',
+             }))
+    
+    new_password2 = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs={
+                'placeholder' : 'Re-enter new password',
+                'class' : 'form-inputs',
+             }))
+
+    class Meta:
+        fields = ("new_password1", 'new_password2', )

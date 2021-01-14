@@ -17,9 +17,6 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         user_email = form.instance.email
         send_mail('subject', 'body of the message', 'tech.academy.user2@gmail.com', [user_email,])
-        # form.instance.is_sell = False
-        # form.instance.product = self.get_object()
-        # print(form.instance.price)
         form.save()
         return super().form_valid(form)
     
@@ -37,3 +34,17 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name= "new-password.html" 
     success_url = reverse_lazy('accounts:login')
     form_class = PasswordResetConfirmForm
+
+class EditProfileView(UpdateView):
+    model = User
+    template_name = 'user-profile.html'
+    form_class = RegisterForm
+    success_url = reverse_lazy('core:index-page')
+    
+    # def get_success_url(self):
+    #     return reverse_lazy('accounts:user-profile', kwargs={'pk':self.get_object().id})
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.username != self.get_object().username:
+            raise PermissionDenied
+        return super(EditProfileView, self).dispatch(request, *args, **kwargs)

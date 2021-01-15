@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 from accounts.models import User
-from .forms import RegisterForm, LoginForm, ResetItDown, PasswordResetConfirmForm
+from .forms import RegisterForm, LoginForm, ResetItDown, PasswordResetConfirmForm, UpdateProfileForm
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
@@ -51,7 +51,7 @@ def activate_account(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        return HttpResponse('Your account has been activate successfully')
+        return render(request, 'index.html')
     else:
         return HttpResponse('Activation link is invalid!')
 
@@ -73,11 +73,11 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 class EditProfileView(UpdateView):
     model = User
     template_name = 'user-profile.html'
-    form_class = RegisterForm
+    form_class = UpdateProfileForm
     success_url = reverse_lazy('core:index-page')
     
     # def get_success_url(self):
-    #     return reverse_lazy('accounts:user-profile', kwargs={'pk':self.get_object().id})
+    #     return reverse_lazy('accounts:user-profile', kwargs={'pk':self.get_object().pk})
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.username != self.get_object().username:

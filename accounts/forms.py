@@ -26,7 +26,7 @@ class RegisterForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'id': 'last_name', 'placeholder': 'Surname', 'class': 'form-inputs'}),
             'username': forms.TextInput(attrs={'id': 'username', 'placeholder': 'Username', 'class': 'form-inputs'}),
             'email': forms.EmailInput(attrs={'id': 'email', 'placeholder': 'Email Adress', 'class': 'form-inputs'}),
-            'user_type': forms.SelectMultiple(attrs={'id': 'user_type', 'class': 'new-usertypes'}),
+            'user_type': forms.CheckboxSelectMultiple(attrs={'id': 'user_type', 'class': 'usertypes'}),
             'terms_agreement': forms.CheckboxInput(attrs={'id': 'conditionAndTerms'})
         }
 
@@ -83,3 +83,16 @@ class PasswordResetConfirmForm(SetPasswordForm):
 
     class Meta:
         fields = ("new_password1", 'new_password2', )
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', 'user_type']
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'id': 'first_name', 'placeholder': 'First Name',  'class': 'form-inputs'}),
+            'last_name': forms.TextInput(attrs={'id': 'last_name', 'placeholder': 'Last Name',  'class': 'form-inputs'}),
+            'username': forms.TextInput(attrs={'id': 'username', 'placeholder': 'Your Username',  'class': 'form-inputs'}),
+            'email': forms.EmailInput(attrs={'id': 'email', 'placeholder': 'Bio',  'class': 'form-inputs'}),
+            'user_type': forms.CheckboxSelectMultiple(attrs={'id': 'user_type', 'class': 'usertypes'}),
+        }

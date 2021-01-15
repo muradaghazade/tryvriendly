@@ -9,7 +9,7 @@
     <meta name="description"
           content="An immersive virtual environment where startups and entrepreneurs can get personalized education, build professional network entirely in VR.">
 
-    <link rel="shortcut icon" type="image/png" sizes="167x167" href="images/favicon-43-min.png"/>
+    <link rel="shortcut icon" type="image/png" sizes="167x167" href="{% static 'images/favicon-43-min.png' %}"/>
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
@@ -212,7 +212,7 @@
     {% if request.user.is_authenticated %}
 
         <div class="header-cta-button dropdown">
-            <a href="{% url 'accounts:login' %}" class="svg-button">
+            <a href="#" class="svg-button">
                 <svg>
                     <rect x="0" y="0" fill="none" width="100%" height="100%" />
                 </svg>
@@ -256,7 +256,8 @@
 Please check your e-mail for confirmation 
 </p>
                 <div class="backRegister">
-                        <a id="registerDirection" href="{% url 'accounts:login' %}">Login</a>
+                    <img src="{% static 'images/Arrow 4.png' %}" alt="">
+                        <a id="registerDirection" href="{% url 'accounts:register' %}">Back</a>
                 </div>
                 
             </form>

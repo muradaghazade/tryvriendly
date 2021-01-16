@@ -1,5 +1,5 @@
 from django import forms
-from accounts.models import User
+from accounts.models import User, UserType
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm, SetPasswordForm, PasswordChangeForm
 
 class RegisterForm(UserCreationForm):
@@ -17,6 +17,14 @@ class RegisterForm(UserCreationForm):
                 'class' : 'form-inputs',
              }))
     
+    user_type = forms.ModelMultipleChoiceField(UserType.objects.all(),
+        required = True,
+        widget = forms.CheckboxSelectMultiple(attrs={
+            'id': 'user_type',
+            'class': 'usertypes'
+            }),
+            label='Select No')
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2', 'user_type', 'terms_agreement']
@@ -26,9 +34,18 @@ class RegisterForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'id': 'last_name', 'placeholder': 'Surname', 'class': 'form-inputs'}),
             'username': forms.TextInput(attrs={'id': 'username', 'placeholder': 'Username', 'class': 'form-inputs'}),
             'email': forms.EmailInput(attrs={'id': 'email', 'placeholder': 'Email Adress', 'class': 'form-inputs'}),
-            'user_type': forms.CheckboxSelectMultiple(attrs={'id': 'user_type', 'class': 'usertypes'}),
+            # 'user_type': forms.CheckboxSelectMultiple(attrs={'id': 'user_type', 'class': 'usertypes'}),
             'terms_agreement': forms.CheckboxInput(attrs={'id': 'conditionAndTerms'})
         }
+
+    # def save(self, *args, **kwargs): 
+    #     user = super().save(*args, **kwargs)
+    #     user_profile = User(terms_agreement=self.cleaned_data['terms_agreement'], first_name=self.cleaned_data['first_name'], last_name=self.cleaned_data['last_name'], username=self.cleaned_data['username'], email=self.cleaned_data['email']) 
+    #     user_profile.save() 
+    #     # user_profile.user_type.add(self.cleaned_data['user_type'])
+    #     print('3-------------', self.cleaned_data['user_type'])
+    #     user_profile.save()
+    #     return user
 
 class LoginForm(AuthenticationForm):
     password = forms.CharField(
@@ -85,6 +102,7 @@ class PasswordResetConfirmForm(SetPasswordForm):
         fields = ("new_password1", 'new_password2', )
 
 class UpdateProfileForm(forms.ModelForm):
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'user_type']

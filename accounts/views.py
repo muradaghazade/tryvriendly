@@ -25,6 +25,11 @@ def usersignup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+
+            user_types = request.POST.getlist('user_type')
+            user.user_type.set(user_types)
+            user.save()
+
             current_site = get_current_site(request)
             email_subject = 'Activate Your Account'
             message = render_to_string('acc_active_email.html', {

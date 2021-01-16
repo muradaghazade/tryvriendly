@@ -7,6 +7,7 @@ from .common import slugify
 class User(AbstractUser):
     terms_agreement = models.BooleanField(default=False)
     email = models.EmailField(('email adress'), unique=True, null=True)
+    # user_types = models.CharField(max_length=1000000)
     user_type = models.ManyToManyField('UserType',  verbose_name=("User Type"))
     slug = models.SlugField(max_length=255, null=True, blank=True)
 

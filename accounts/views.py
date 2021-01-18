@@ -24,7 +24,10 @@ def usersignup(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
-            user.save()
+            if user.terms_agreement == True:
+                user.save()
+            else:
+                raise PermissionDenied
 
             user_types = request.POST.getlist('user_type')
             user.user_type.set(user_types)

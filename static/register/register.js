@@ -630,3 +630,21 @@ let user_type_f = () => {
             // }
         }
     })
+
+    termsAgree = document.querySelector('#conditionAndTerms');
+
+
+    termsAgree.addEventListener('click', () => {
+        document.querySelector('.submit-div').classList.toggle("checkedd")
+        if (termsAgree.checked == true) {
+            
+            document.querySelector('.submit-div').innerHTML = `<input type="submit" value="Register" class="form-submit">`
+        }
+        else {
+            document.querySelector('.submit-div').innerHTML = `<input type="submit" value="Register" class="form-submit" style="color: #888; border: 2px solid #888;" disabled>`
+        }
+
+    })
+
+
+

@@ -595,3 +595,38 @@ function scrollFunction() {
         }, 5);
     }
 }
+
+inputsss = document.querySelectorAll('input');
+
+// labellll = document.querySelector('label')
+
+let user_type_f = () => {
+    for (let i=0; i < inputsss.length; i++){
+        if (inputsss[i].getAttribute('name') == 'user_type'){
+            if (inputsss[i].checked == true){
+                input_lable = inputsss[i].parentElement
+                input_lable.classList.toggle("checked_class");
+    
+            }
+        }
+       
+        // else {
+        //     console.log('im unchecked')
+        // }
+    } }
+
+    document.querySelector('.usertypes').addEventListener('click', () => {
+        for (let i=0; i < inputsss.length; i++){
+            if (inputsss[i].getAttribute('name') == 'user_type'){
+                if (inputsss[i].checked == true){
+                    input_lable = inputsss[i].parentElement
+                    input_lable.classList.toggle("checked_class");
+        
+                }
+            }
+           
+            // else {
+            //     console.log('im unchecked')
+            // }
+        }
+    })

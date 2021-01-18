@@ -936,7 +936,7 @@ header nav.big-screen {
     border-radius: 5px
   }
 
-/* .usertypes {
+.usertypes {
     display: flex;
     margin-top: 30px;
 }
@@ -954,25 +954,25 @@ header nav.big-screen {
     border-color: #0d6efd;
 }
 
-.usertypes li label:focus{
-    color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-}
 
 .usertypes li {
     list-style: none;
     margin: 20px;
     
 }
+
+.checked_class {
+    background-color: #4a58f3 !important;
+}
+
 .usertypes li input{
-    background-color: #d84215 !important;
+    /* background-color: #d84215 !important; */
     border: none;
-    color: red;
+    /* color: red; */
     position: absolute;
     clip: rect(0,0,0,0);
     pointer-events: none;
-} */
+}
 
 header nav.big-screen ul {
     display: -webkit-box;

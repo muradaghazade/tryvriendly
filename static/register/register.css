@@ -938,6 +938,7 @@ header nav.big-screen {
 
 .usertypes {
     display: flex;
+    flex-flow: wrap;
     margin-top: 30px;
 }
 

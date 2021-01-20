@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index-page'),
     path('terms-and-conditions/', views.TermsView.as_view(), name='terms-page'),
     path('congratulation/', views.SuccessView.as_view(), name='congrats-page'),
+    path('coming-soon/', views.UpcomingView.as_view(), name='upcoming-page'),
     path('sing-up-for-beta/', views.SingUpForBetaView.as_view(), name='sing-for-beta-page'),
 ]

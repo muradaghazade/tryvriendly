@@ -146,7 +146,7 @@
                         <a href="register.html"><span>Registration</span></a>
                     </div>
                 </li>
-                <li class="upcoming"><a href="upcoming.html"><span>Upcoming session</span></a></li>
+                <li class="upcoming"><a href="{% url 'core:upcoming-page' %}"><span>Upcoming session</span></a></li>
                 <li class="sign-up-for-beta"><a href="{% url 'core:sing-for-beta-page' %}"><span>Sign up for Beta</span></a></li>
 
             </ul>
@@ -202,7 +202,7 @@
                 <a href="{% url 'core:index-page' %}"><span>Single event</span></a>
             </div>
         </li> -->
-                <li class="upcoming"><a href="upcoming.html"><span>Upcoming session</span></a></li>
+                <li class="upcoming"><a href="{% url 'core:upcoming-page' %}"><span>Upcoming session</span></a></li>
                 <li class="sign-up-for-beta"><a href="{% url 'core:sing-for-beta-page' %}"><span>Sign up for Beta</span></a></li>
 
             </ul>
@@ -342,7 +342,7 @@
 
             <div class="lower">
                 <div class="copyright">
-                    <p>&copy; Copyright 2020, Vriendly.</p>
+                    <p>&copy; Copyright 2021, Vriendly.</p>
                 </div>
             </div>
         </div>

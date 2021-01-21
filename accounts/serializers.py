@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'full_name', 'password')
+        fields = ('email', 'full_name', 'password', 'user_type')
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
@@ -20,10 +20,14 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'full_name', 'password')
+        fields = ('email', 'full_name', 'password', 'user_type')
 
 
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data['full_name'], validated_data['email'], validated_data['password'])
+        user = User.objects.create_user(validated_data['user_type'])
+                                        #validated_data['full_name'],
+                                        #validated_data['email'],
+                                        #validated_data['password'])
+
 
         return user

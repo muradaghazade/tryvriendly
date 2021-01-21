@@ -14,14 +14,14 @@ def slugify(title):
     )
 
     title_url = title.strip().lower()
-    
+
     for before, after in symbol_mapping:
         title_url = title_url.replace(before, after)
 
     for symbol in title_url:
         if symbol in string.punctuation:
             title_url = title_url.replace(symbol,'-')
-            
+
     title_url = title_url.strip('-')
     title_url_list = list(title_url)
     for i in range(len(title_url_list)):

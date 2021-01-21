@@ -6,6 +6,8 @@ from .forms import RegisterForm, LoginForm, ResetItDown, PasswordResetConfirmFor
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
+from django.db import models
+
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -120,6 +122,6 @@ class LoginAPI(KnoxLoginView):
     def post(self, request, format=None):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        login(request, user)
+        email = serializer.validated_data['email']
+        login(request, email)
         return super(LoginAPI, self).post(request, format=None)

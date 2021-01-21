@@ -9,20 +9,15 @@
     <meta name="description"
           content="An immersive virtual environment where startups and entrepreneurs can get personalized education, build professional network entirely in VR.">
 
-    <link rel="shortcut icon" type="image/png" sizes="167x167" href="{% static 'termandconditions/termandconditions.css' %}images/favicon-43-min.png"/>
+    <link rel="shortcut icon" type="image/png" sizes="167x167" href="{% static 'images/favicon-43-min.png' %}"/>
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    
+
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600i,700&display=swap" rel="stylesheet">
 
-  <!-- BOOTSTRAP -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
-    <!-- FONT AWESOME  -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     <!-- OWL CAROUSEL -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -30,44 +25,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
             integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="{% static 'register/register.css' %}"/>
+    <link rel="stylesheet" href="{% static 'upcoming/upcoming.css' %}"/>
     <title>Vriendly</title>
     <style>
- 
-
         .dropdown {
-          position: relative;
-          display: inline-block;
+            position: relative;
+            display: inline-block;
         }
-        
+
         .dropdown-content {
-          display: none;
-          position: absolute;
-          min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
+            display: none;
+            position: absolute;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
         }
-        
+
         .dropdown-content a {
-          color: rgb(255, 255, 255);
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
+            color: rgb(255, 255, 255);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
         }
-        
-        
+
+
         .dropdown:hover .dropdown-content {
-          display: block;
+            display: block;
         }
-        #edit{
-            border:1px solid white;
+
+        #edit {
+            border: 1px solid white;
             border-bottom: none;
-            }
-        #logout{
-            border:1px solid white;
+        }
+
+        #logout {
+            border: 1px solid white;
             border-top: none;
         }
-        hr{ padding-left: 5px !important;
+
+        hr {
+            padding-left: 5px !important;
             padding-right: 5px !important;
             margin: 0;
             width: 120px;
@@ -76,9 +73,7 @@
             position: relative;
             left: 12px;
         }
-         
-        
-            </style>
+    </style>
 </head>
 <body>
 
@@ -88,12 +83,9 @@
     </div>
     <img src="{% static 'images/dls-circle-text-44-min.png' %}" alt="Discover, Learn, Socialize.">
     <img src="{% static 'images/dls-pattern-min.png' %}" alt="pattern">
-    <img src="{% static 'images/dls-pattern-min.png' %}" alt="pattern">
+    <img src="{% static 'images/images/dls-pattern-min.png' %}" alt="pattern">
 </div>
 <!-- LOADING ENDS-->
-
-
-
 
 
 <!-- HEADER START -->
@@ -115,9 +107,6 @@
                 <div class="items">
                     <a class="about-us" href="{% url 'core:index-page' %}"><span>Our Story</span></a>
                     <a href="{% url 'core:index-page' %}"><span> Advantages</span></a>
-                    <a href="{% url 'core:index-page' %}"><span> Team</span></a>
-                    <a href="{% url 'core:index-page' %}"><span> Partners</span></a>
-
                 </div>
             </li>
             <li class="what-we-do">
@@ -129,22 +118,20 @@
                     <a href="{% url 'core:index-page' %}"><span> Video</span></a>
                 </div>
             </li>
-            <!-- <li class="who-we-are">
-                <p><span>Pricing</span></p>
+            <li class="who-we-are">
+                <p><span>Who We Are</span></p>
                 <div class="items">
-                    <a href="{% url 'core:index-page' %}"><span> Subscription</span></a>
-                    <a href="{% url 'core:index-page' %}"><span>Single event</span></a>
+                    <a href="{% url 'core:index-page' %}"><span> Team</span></a>
+                    <a href="{% url 'core:index-page' %}"><span>Partners</span></a>
                 </div>
-            </li> -->
+            </li>
             <li style="display: none" class="order-vriendly">
                 <p><span>Order Vriendly</span></p>
                 <div class="items">
                     <a href="register.html"><span>Registration</span></a>
                 </div>
             </li>
-            <li class="upcoming"><a href="{% url 'core:upcoming-page' %}"><span>Upcoming session</span></a></li>
-            <li class="sign-up-for-beta"><a href="{% url 'core:sing-for-beta-page' %}"><span>Sing up for Beta</span></a></li>
-
+            <li class="upcoming"><a href="upcoming.html"><span>Upcoming session</span></a></li>
         </ul>
     </nav>
 
@@ -175,9 +162,7 @@
             <div class="items">
                 <a href="{% url 'core:index-page' %}"><span>Our Story</span></a>
                 <a href="{% url 'core:index-page' %}"><span> Advantages</span></a>
-                <a href="{% url 'core:index-page' %}"><span> Team</span></a>
-                <a href="{% url 'core:index-page' %}"><span> Partners</span></a>
-
+               
             </div>
         </li>
 
@@ -190,16 +175,14 @@
                 <a href="{% url 'core:index-page' %}"><span>Video</span></a>
             </div>
         </li>
-        <!-- <li class="who-we-are" id="whoweare">
-            <a href="{% url 'core:index-page' %}"><span>Pricing<img src="./images/down-arrow-01-min.png" alt="right arrow"></span></a>
+        <li class="who-we-are" id="whoweare">
+            <a href="{% url 'core:index-page' %}"><span>Who We Are<img src="{% static 'images/down-arrow-01-min.png' %}" alt="right arrow"></span></a>
             <div class="items">
-                <a href="{% url 'core:index-page' %}"><span> Subscription</span></a>
-                <a href="{% url 'core:index-page' %}"><span>Single event</span></a>
+                <a href="{% url 'core:index-page' %}"><span> Team</span></a>
+                <a href="{% url 'core:index-page' %}"><span>Partners</span></a>
             </div>
-        </li> -->
+        </li>
         <li class="upcoming"><a href="{% url 'core:upcoming-page' %}"><span>Upcoming session</span></a></li>
-        <li class="sign-up-for-beta"><a href="{% url 'core:sing-for-beta-page' %}"><span>Sign up for Beta</span></a></li>
-
     </ul>
 </nav>
 
@@ -241,48 +224,13 @@
 </header>
 
 
-
 <!-- HEADER END -->
-
 
 <!-- MAIN START -->
 <main id="main">
     <div class="bg-image">
-        <div class="register-container">
-            <h1 class="register-title">Registration</h1>
-            <form action="" method="POST" class="register-form" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form.non_field_error}}
-                {{form.first_name}}
-                {{form.first_name.errors}}
-                {{form.last_name}}
-                {{form.last_name.errors}}
-                {{form.username}}
-                {{form.username.errors}}
-                {{form.email}}
-                {{form.email.errors}}
-                {{form.password1}}
-                {{form.password1.errors}}
-                {{form.password2}}
-                {{form.password2.errors}}
-                <div id="select-holder">
-                    {{form.user_type}}
-                    {{form.user_type.errors}}
-                </div>
-                <div class="termsdiv">
-                    {{form.terms_agreement}}
-                    {{form.terms_agreement.errors}}
-                    <a class="termcond" href="{% url 'core:terms-page' %}">Term and Conditions</a>
-                </div>
-                <div class="submit-div" style="width: 100%;">
-                    <input type="submit" value="Register" class="form-submit" style="color: #888; border: 2px solid #888;" disabled>
-                </div>
-                
-            </form>
-            <div class="bottom-text">
-                <h3>thank you!</h3>
-                <h3>we will contact you soon</h3>
-            </div>
+        <div class="coming-soon">
+            <h1>COMING SOON!</h1>
         </div>
     </div>
 </main>
@@ -295,26 +243,24 @@
             <div class="our-company">
                 <h2>Our Company</h2>
                 <div class="items">
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Our Story</span></a>
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Advantages</span></a>
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Team</span></a>
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Partners</span></a>
-
+                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>About Us</span></a>
+                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Competitive Advantages</span></a>
+                    <a rel="noreferrer" href="#"><span>Features</span></a>
                 </div>
             </div>
             <div class="what-we-do">
                 <h2>What We Do</h2>
                 <div class="items">
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Milestones</span></a>
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Customers</span></a>
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span> Video</span></a>
+                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Roadmap</span></a>
+                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Happy Customers</span></a>
+                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Demo Video</span></a>
                 </div>
             </div>
             <div class="who-we-are">
-                <h2>Pricing</h2>
+                <h2>Who We Are</h2>
                 <div class="items">
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Subscription</span></a>
-                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Single event</span></a>
+                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Our Team</span></a>
+                    <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Our Partners</span></a>
                 </div>
             </div>
             <div class="contact-us">
@@ -323,7 +269,8 @@
                     <a rel="noreferrer" id="mail-to" href="mailto:info@vriendly.co">
                         <p>info@vriendly.co</p>
                     </a>
-<!--                    <p id="phone">+16174190727</p>-->
+                    <p id="address">Sunnyvale, CA</p>
+                    <!--                    <p id="phone">+16174190727</p>-->
                     <div class="links">
                         <a rel="noreferrer" href="https://www.linkedin.com/company/vriendly1/" target="_blank"><img
                                 src="{% static 'images/footer/linkedin-footer-min.png' %}"
@@ -349,20 +296,18 @@
 
         <div class="our-company">
             <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>About Us</span></a>
-            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Advantages</span></a>
-            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Team</span></a>
-                <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Partners</span></a>
-
+            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Competitive Advantages</span></a>
+            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Features</span></a>
         </div>
         <div class="what-we-do">
             <!-- <a href="#how-it-works"><span>How It Works</span></a> -->
-            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Milestones</span></a>
-            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Customers</span></a>
+            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Roadmap</span></a>
+            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Happy Customers</span></a>
             <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Demo Video</span></a>
         </div>
         <div class="who-we-are">
-            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Subscription</span></a>
-            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Single event</span></a>
+            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Our Team</span></a>
+            <a rel="noreferrer" href="{% url 'core:index-page' %}"><span>Our Partners</span></a>
         </div>
         <div class="contact-us">
             <a rel="noreferrer" href="mailto:info@vriendly.co">
@@ -379,9 +324,11 @@
             </div>
         </div>
 
-       
+        <div class="address">
+            <p>Sunnyvale, CA</p>
+        </div>
         <div class="phone">
-<!--            <p>+16174190727</p>-->
+            <!--            <p>+16174190727</p>-->
         </div>
 
         <div class="copyright">
@@ -392,14 +339,10 @@
 </footer>
 <!-- FOOTER END -->
 
-
 <div class="tracker"></div>
 
-<script src="{% static 'register/register.js' %}"></script>
-<!-- BOOTSTRAP SCRIPT -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<script src="{% static 'upcoming/upcoming.js' %}"></script>
+
 <!-- animations on scroll -->
 <script src="{% static 'upcoming/upcoming-animation.js' %}"></script>
 <!--<script src="/js/animations.js"></script>-->

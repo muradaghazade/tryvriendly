@@ -1,9 +1,15 @@
 asgiref==3.3.1
+cffi==1.14.4
+cryptography==3.3.1
 Django==3.1.5
+django-autofixture==0.12.1
 django-cors-headers==3.6.0
+django-rest-knox==4.1.0
 django-six==1.0.4
-django-suit @ https://github.com/darklow/django-suit/tarball/v2
+django-suit==2.0a1
+djangorestframework==3.12.2
 psycopg2-binary==2.8.6
+pycparser==2.20
 pytz==2020.5
 six==1.14.0
 sqlparse==0.4.1

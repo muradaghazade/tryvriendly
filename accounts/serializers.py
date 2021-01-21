@@ -32,3 +32,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.user_type.add(*validated_data['user_type'])
 
         return user
+
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user is not None:
+            return user
+        raise serializers.ValidationError("Invalid Details.")

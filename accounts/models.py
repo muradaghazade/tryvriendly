@@ -18,10 +18,10 @@ class User(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
-"""    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
         self.slug = f'{slugify(self.username)}'
-        super(User, self).save(*args, **kwargs)"""
+        super(User, self).save(*args, **kwargs)
 
 class UserType(models.Model):
     title = models.CharField(max_length=80)

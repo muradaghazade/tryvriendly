@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User
 from django.contrib.auth import authenticate
+from django.utils.crypto import get_random_string
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -42,3 +43,14 @@ class UserLoginSerializer(serializers.Serializer):
         if user is not None:
             return user
         raise serializers.ValidationError("Invalid Details.")
+
+class CreateEvent(serializers.Serializer):
+    room_id = serializers.CharField()
+    event_name = serializers.CharField()
+
+    def create_event(self, data):
+        if room_id and event_name is not None:
+            user = authenticate(**data)
+            return user
+        raise serializers.ValidationError("Cannot Create Event")
+#class GetRooms(serializers.Serializer)

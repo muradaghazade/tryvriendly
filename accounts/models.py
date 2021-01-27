@@ -11,9 +11,6 @@ class User(AbstractUser):
     user_type = models.ManyToManyField('UserType', verbose_name=("User Type"))
     slug = models.SlugField(max_length=255, null=True, blank=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'

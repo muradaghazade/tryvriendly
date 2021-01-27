@@ -20,9 +20,12 @@ from django.contrib.auth import login, authenticate
 
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-from .serializers import UserSerializer, RegisterSerializer, UserLoginSerializer
+from .serializers import UserSerializer, RegisterSerializer, UserLoginSerializer, CreateEvent
+from django.utils.crypto import get_random_string
+
 
 from knox.models import AuthToken
+from rest_framework.views import APIView
 
 def usersignup(request):
     if request.method == 'POST':
@@ -106,8 +109,9 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({
+        "status": "success",
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
-        "token": AuthToken.objects.create(user)[1]
+        #"token": AuthToken.objects.create(user)[1]
         })
 
 
@@ -121,4 +125,27 @@ class LoginAPI(generics.GenericAPIView):
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
+        })
+
+"""class GetRooms(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = GetRoomsSerializer
+
+    def post(self, request, *args, **kwargs):
+        request.data.get("room_name")
+        request.data.get("room_id")
+        request.data.get("thumbnail_link")
+        request.data.get("description")
+
+        return self.create(request, *args, **kwargs)"""
+class CreateEvent(generics.GenericAPIView):
+    serializer_class = CreateEvent
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        return Response({
+        "success": True,
+        "ID": get_random_string(8),
         })

@@ -17,5 +17,6 @@ urlpatterns = [
     # path('edit-profile/<int:pk>/', EditProfileView.as_view(), name='edit_profile'),
     path('password-reset-confirm/<str:uidb64>/<str:token>/', CustomPasswordResetConfirmView.as_view(), name = 'password-reset-confirm'),
     path('register-api/', views.RegisterAPI.as_view(), name='registerApi'),
-    path('login-api/', views.LoginAPI.as_view(), name='loginApi')
+    path('login-api/', views.LoginAPI.as_view(), name='loginApi'),
+    path('create-rooms/', views.CreateEvent.as_view(), name='createroom')
 ]

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
-from accounts.models import User
+from accounts.models import User, CreateIvent
 from .forms import RegisterForm, LoginForm, ResetItDown, PasswordResetConfirmForm, UpdateProfileForm
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 from django.core.exceptions import PermissionDenied
@@ -18,14 +18,16 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, viewsets
 from rest_framework.response import Response
-from .serializers import UserSerializer, RegisterSerializer, UserLoginSerializer, CreateEvent
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CreateEvent, UpdateUserSerializer
 from django.utils.crypto import get_random_string
-
+from knox.views import LoginView as KnoxLoginView
 
 from knox.models import AuthToken
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+from rest_framework import status
 
 def usersignup(request):
     if request.method == 'POST':
@@ -115,37 +117,49 @@ class RegisterAPI(generics.GenericAPIView):
         })
 
 
-class LoginAPI(generics.GenericAPIView):
-    serializer_class = UserLoginSerializer
+class LoginAPI(KnoxLoginView):
+    permission_classes = (permissions.AllowAny, )
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+    def post(self, request, format = None):
+        serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
-        })
+        user = serializer.validated_data['user']
+        login(request,user)
+        return super().post(request, format=None)
 
-"""class GetRooms(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-    serializer_class = GetRoomsSerializer
 
-    def post(self, request, *args, **kwargs):
-        request.data.get("room_name")
-        request.data.get("room_id")
-        request.data.get("thumbnail_link")
-        request.data.get("description")
+class CreateEventView(APIView):
+    permission_classes=(permissions.IsAuthenticated,)
 
-        return self.create(request, *args, **kwargs)"""
-class CreateEvent(generics.GenericAPIView):
-    serializer_class = CreateEvent
+    def post(self, request):
+        user = User.objects.get(email=request.user.email)
+        if True:
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        return Response({
-        "success": True,
-        "ID": get_random_string(8),
-        })
+            query = CreateIvent.objects.all()
+            serializer = CreateEvent(query, many=True)
+
+            return Response({"Status":"Room Created Successfully"})
+
+        else:
+            return Response({"Cannot Create Room"})
+
+class GetRoomViews(APIView):
+        permission_classes=(permissions.IsAuthenticated,)
+
+        def post(self,request):
+            user = User.objects.get(email=request.user.email)
+            if True:
+                query = GetRooms.objects.all()
+                serializer = GetRoomSerializers(query, many=True)
+
+                return Response(serializer.data)
+
+            else:
+
+                return Response({"error":"User does not exists"})
+
+class UpdateProfileView(generics.UpdateAPIView):
+
+    queryset = User.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = UpdateUserSerializer

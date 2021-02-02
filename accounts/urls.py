@@ -1,9 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import url
 from django.contrib.auth.views import LogoutView
 from . import views
-from accounts.views import LoginUserView, ResetPassword, CustomPasswordResetConfirmView, EditProfileView
+from accounts.views import LoginUserView, ResetPassword, CustomPasswordResetConfirmView, EditProfileView, CreateEventView
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register('accounts', views.CreateEventView, basename='accounts')
 app_name = 'accounts'
 
 urlpatterns = [
@@ -18,5 +21,8 @@ urlpatterns = [
     path('password-reset-confirm/<str:uidb64>/<str:token>/', CustomPasswordResetConfirmView.as_view(), name = 'password-reset-confirm'),
     path('register-api/', views.RegisterAPI.as_view(), name='registerApi'),
     path('login-api/', views.LoginAPI.as_view(), name='loginApi'),
-    path('create-rooms/', views.CreateEvent.as_view(), name='createroom')
+    path('create-rooms/', views.CreateEventView.as_view(), name="createEvent"),
+    path('get-rooms/', views.GetRoomViews.as_view(), name='getrooms'),
+    path('update-details/<int:pk>/', views.UpdateProfileView.as_view(), name='updateprofile')
+
 ]

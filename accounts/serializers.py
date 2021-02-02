@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, CreateIvent
 from django.contrib.auth import authenticate
 from django.utils.crypto import get_random_string
+from rest_framework.views import APIView
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -34,23 +35,89 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
 
-class UserLoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    password = serializers.CharField()
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField(
+        style = { 'input_type': 'password' }, trim_whitespace = False
+    )
 
     def validate(self, data):
-        user = authenticate(**data)
-        if user is not None:
-            return user
-        raise serializers.ValidationError("Invalid Details.")
+        print(data)
+        email = data.get('email')
+        password = data.get('password')
 
-class CreateEvent(serializers.Serializer):
-    room_id = serializers.CharField()
-    event_name = serializers.CharField()
+        if email and password:
+            if User.objects.filter(email = email).exists():
+                user = authenticate(request = self.context.get('request'), email= email, password = password)
+            else:
+                msg = {
+                    'detail' : 'User Not Found',
+                    'status' : False,
+                }
+                raise serializers.ValidationError(msg)
 
-    def create_event(self, data):
-        if room_id and event_name is not None:
-            user = authenticate(**data)
-            return user
-        raise serializers.ValidationError("Cannot Create Event")
-#class GetRooms(serializers.Serializer)
+            if not user:
+                msg = {
+                    'detail' : 'Does Not Exist',
+                    'status' : False,
+                }
+                raise serializers.ValidationError(msg, code='authorization')
+
+        else:
+            msg = {
+                    'detail' : 'Not Found',
+                    'status' : False,
+            }
+            raise serializers.ValidationError(msg, code='authorization')
+
+        data['user'] = user
+        return data
+
+class CreateEvent(serializers.ModelSerializer):
+    class Meta:
+        model = CreateIvent
+        fields = ('public_id', 'event_name', 'date_created')
+
+class GetRoomViews(APIView):
+    
+    def post(self,request):
+        user = User.objects.get(email=request.user.email)
+        if user.exists():
+            query = GetRooms.objects.all()
+            serializer = GetRoomSerializers(query, many=True)
+
+            return Response(serializer.data)
+
+        else:
+
+            return Response({"error":"User does not exists"})
+
+class UpdateUserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ('email', 'password')
+
+    def validate_email(self, value):
+        user = self.context['request'].user
+        if User.objects.exclude(pk=user.pk).filter(email=value).exists():
+            raise serializers.ValidationError({"email": "This email is already in use."})
+        return value
+
+    def validate_username(self, value):
+        user = self.context['request'].user
+        if User.objects.exclude(pk=user.pk).filter(password=value).exists():
+            raise serializers.ValidationError({"password": "This password is already in use."})
+        return value
+
+    def update(self, instance, validated_data):
+        instance.email = validated_data['email']
+        instance.password = validated_data['password']
+
+        instance.save()
+
+        return Response({
+        "Status: Success",
+        "User Profile Successfully Updated"
+        })

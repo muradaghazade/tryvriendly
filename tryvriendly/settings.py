@@ -150,6 +150,8 @@ LOGIN_REDIRECT_URL = reverse_lazy('core:index-page')
 
 LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 
+APPEND_SLASH=False
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 

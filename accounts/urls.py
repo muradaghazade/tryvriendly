@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.conf.urls import url
 from django.contrib.auth.views import LogoutView
 from . import views
-from accounts.views import LoginUserView, ResetPassword, CustomPasswordResetConfirmView, EditProfileView, CreateEventView
+from accounts.views import LoginUserView, ResetPassword, CustomPasswordResetConfirmView, EditProfileView, CreateEventView, get_rooms
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -22,7 +22,7 @@ urlpatterns = [
     path('register-api/', views.RegisterAPI.as_view(), name='registerApi'),
     path('login-api/', views.LoginAPI.as_view(), name='loginApi'),
     path('create-rooms/', views.CreateEventView.as_view(), name="createEvent"),
-    path('get-rooms/', views.GetRoomViews.as_view(), name='getrooms'),
+    path('get-rooms/', get_rooms, name='getrooms'),
     path('update-details/<int:pk>/', views.UpdateProfileView.as_view(), name='updateprofile')
 
 ]

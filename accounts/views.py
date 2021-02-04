@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
-from accounts.models import User, CreateIvent
+from accounts.models import User, CreateIvent, GetRooms
 from .forms import RegisterForm, LoginForm, ResetItDown, PasswordResetConfirmForm, UpdateProfileForm
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 from django.core.exceptions import PermissionDenied
@@ -20,7 +20,7 @@ from django.contrib.auth import login, authenticate
 
 from rest_framework import generics, permissions, viewsets
 from rest_framework.response import Response
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CreateEvent, UpdateUserSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CreateEvent, UpdateUserSerializer, GetRoomSerializers
 from django.utils.crypto import get_random_string
 from knox.views import LoginView as KnoxLoginView
 
@@ -28,6 +28,8 @@ from knox.models import AuthToken
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import status
+import random
+import string
 
 def usersignup(request):
     if request.method == 'POST':
@@ -138,25 +140,27 @@ class CreateEventView(APIView):
             query = CreateIvent.objects.all()
             serializer = CreateEvent(query, many=True)
 
-            return Response({"Status":"Room Created Successfully"})
+            return Response({"Status":"Room Created Successfully",
+                             "Unique ID": ''.join(random.choice(string.digits) for _ in range(8))
+})
 
         else:
             return Response({"Cannot Create Room"})
 
-class GetRoomViews(APIView):
-        permission_classes=(permissions.IsAuthenticated,)
+@api_view(['POST'])
+def get_rooms(request):
+    room=GetRooms.objects.all()
+    if request.method=='GET':
+        serializer=RoomSerializer(room,many=True)
+        return Response(serializer.data)
 
-        def post(self,request):
-            user = User.objects.get(email=request.user.email)
-            if True:
-                query = GetRooms.objects.all()
-                serializer = GetRoomSerializers(query, many=True)
-
-                return Response(serializer.data)
-
-            else:
-
-                return Response({"error":"User does not exists"})
+    if request.method=='POST':
+        serializer=GetRoomSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"data":request.data, "status":status.HTTP_201_CREATED})
+        else:
+            return Response(serializer.error,status=status.HTTP_404_NOT_FOUND)
 
 class UpdateProfileView(generics.UpdateAPIView):
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, CreateIvent
+from .models import User, CreateIvent, GetRooms
 from django.contrib.auth import authenticate
 from django.utils.crypto import get_random_string
 from rest_framework.views import APIView
@@ -80,19 +80,10 @@ class CreateEvent(serializers.ModelSerializer):
         model = CreateIvent
         fields = ('public_id', 'event_name', 'date_created')
 
-class GetRoomViews(APIView):
-
-    def post(self,request):
-        user = User.objects.get(email=request.user.email)
-        if user.exists():
-            query = GetRooms.objects.all()
-            serializer = GetRoomSerializers(query, many=True)
-
-            return Response(serializer.data)
-
-        else:
-
-            return Response({"error":"User does not exists"})
+class GetRoomSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = GetRooms
+        fields = ('id', 'room_name', 'desc', 'thumbnail_link')
 
 class UpdateUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

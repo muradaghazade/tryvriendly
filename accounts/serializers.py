@@ -3,6 +3,8 @@ from .models import User, CreateIvent
 from django.contrib.auth import authenticate
 from django.utils.crypto import get_random_string
 from rest_framework.views import APIView
+from rest_framework.response import Response
+
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -79,7 +81,7 @@ class CreateEvent(serializers.ModelSerializer):
         fields = ('public_id', 'event_name', 'date_created')
 
 class GetRoomViews(APIView):
-    
+
     def post(self,request):
         user = User.objects.get(email=request.user.email)
         if user.exists():
@@ -117,7 +119,4 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
         instance.save()
 
-        return Response({
-        "Status: Success",
-        "User Profile Successfully Updated"
-        })
+        return instance

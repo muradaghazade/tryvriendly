@@ -160,6 +160,10 @@ class GetRoomViews(APIView):
 
 class UpdateProfileView(generics.UpdateAPIView):
 
-    queryset = User.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = UpdateUserSerializer
+        if True:
+            permission_classes = (permissions.IsAuthenticated,)
+            queryset = User.objects.all()
+            serializer_class = UpdateUserSerializer
+            print(Response({"User Details Updated Successfulyy"}))
+        else:
+            print(Response({"User Details Does Not Updated"}))

@@ -16,7 +16,7 @@ class RegisterForm(UserCreationForm):
                 'placeholder' : 'Confirm password',
                 'class' : 'form-inputs',
              }))
-    
+
     user_type = forms.ModelMultipleChoiceField(UserType.objects.all(),
         required = True,
         widget = forms.CheckboxSelectMultiple(attrs={
@@ -38,10 +38,10 @@ class RegisterForm(UserCreationForm):
             'terms_agreement': forms.CheckboxInput(attrs={'id': 'conditionAndTerms'})
         }
 
-    # def save(self, *args, **kwargs): 
+    # def save(self, *args, **kwargs):
     #     user = super().save(*args, **kwargs)
-    #     user_profile = User(terms_agreement=self.cleaned_data['terms_agreement'], first_name=self.cleaned_data['first_name'], last_name=self.cleaned_data['last_name'], username=self.cleaned_data['username'], email=self.cleaned_data['email']) 
-    #     user_profile.save() 
+    #     user_profile = User(terms_agreement=self.cleaned_data['terms_agreement'], first_name=self.cleaned_data['first_name'], last_name=self.cleaned_data['last_name'], username=self.cleaned_data['username'], email=self.cleaned_data['email'])
+    #     user_profile.save()
     #     # user_profile.user_type.add(self.cleaned_data['user_type'])
     #     print('3-------------', self.cleaned_data['user_type'])
     #     user_profile.save()
@@ -90,7 +90,7 @@ class PasswordResetConfirmForm(SetPasswordForm):
                 'placeholder' : 'New password',
                 'class' : 'form-inputs',
              }))
-    
+
     new_password2 = forms.CharField(
         widget = forms.PasswordInput(
             attrs={

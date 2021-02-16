@@ -27,7 +27,7 @@ SECRET_KEY = 'b*c91)^!hy2^)%!-*inssgj@i5%a5^vwkrxi4_w)l@8#=3^0k='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api-dot-vriendly-273913.uc.r.appspot.com']
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
@@ -90,20 +90,26 @@ WSGI_APPLICATION = 'tryvriendly.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
+        # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
+        # 'ENGINE': 'django.db.backends.mysql' instead of the following.
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'compass',
-        'USER': 'muradaghazada',
-        'PASSWORD': '885522',
+        'NAME': 'postgres',
+        'USER': 'eldaniz',
+        'PASSWORD': 'eldenzero20',
+        # For MySQL, set 'PORT': '3306' instead of the following. Any Cloud
+        # SQL Proxy instances running locally must also be set to tcp:3306.
         'PORT': '5432',
-        'HOST': '127.0.0.1'
     }
 }
-
+# In the flexible environment, you connect to CloudSQL using a unix socket.
+# Locally, you can use the CloudSQL proxy to proxy a localhost connection
+# to the instance
+DATABASES['default']['HOST'] = '/cloudsql/vriendly-273913:europe-west3:restapis'
+if os.getenv('GAE_INSTANCE'):
+    pass
+else:
+    DATABASES['default']['HOST'] = '127.0.0.1'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -156,10 +162,9 @@ APPEND_SLASH=False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'tech.academy.user2@gmail.com'

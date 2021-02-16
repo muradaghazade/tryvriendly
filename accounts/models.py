@@ -5,6 +5,7 @@ from .common import slugify
 import uuid
 
 class User(AbstractUser):
+
     terms_agreement = models.BooleanField(default=False)
     email = models.EmailField(('email adress'), unique=True, null=True)
     # user_types = models.CharField(max_length=1000000)
